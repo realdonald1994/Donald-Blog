@@ -1,0 +1,13 @@
+/**
+* @name: footer
+* @author: Zhongxu(Donald)
+* @date: 10/08/2020 22:38
+* @description：footer
+*/
+
+.footer-div {
+    text-align: center;
+    width: 100%;
+    padding: 1rem;
+    color:#888;
+}
