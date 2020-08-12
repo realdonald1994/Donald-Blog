@@ -35,6 +35,7 @@ const Header = () =>{
       Router.push('/index')
     }else{
       Router.push('/list?id='+e.key)
+
     }
   }
 

@@ -1,25 +1,18 @@
-/**
-* @name: author
-* @author: Zhongxu(Donald)
-* @date: 10/08/2020 22:14
-* @description：author
-*/
-
-.author-div {
+.author-div{
     text-align: center;
-    padding: 1rem;
-}
+    padding:1rem;
+    margin-bottom: .5rem
 
-.author-div div {
+}
+.author-div div{
     margin-bottom: 1rem;
-}
 
-.author-introduction {
-    font-size: .8rem;
+}
+.author-introduction{
+    font-size:.8rem;
     color: #999;
 }
-
-.account {
+.account{
     background-color: #999;
     margin-left: .5rem;
     margin-right: .5rem;

@@ -14,35 +14,28 @@ body{
     padding:.3rem;
     border-radius: .3rem;
     border:1px solid #eee;
+
+
 }
 .comm-main{
     margin-top: .5rem;
 }
 
-/**
-* @name: index
-* @author: Zhongxu(Donald)
-* @date: 10/08/2020 21:53
-* @description：index
-*/
 
-.list-title {
-    font-size: 1.3rem;
+.list-title{
+    font-size:1.3rem;
     color: #1e90ff;
     padding: 0 0.5rem;
 }
-
-.list-context {
+.list-context{
     color:#777;
-    padding: .5rem;
+    padding:.5rem;
 }
-
 .list-icon{
     padding:.5rem 0;
-    color: #aaa;
+    color:#AAA;
 }
-
-.list-icon span {
+.list-icon span{
     display: inline-block;
     padding: 0 10px;
 }

@@ -12,7 +12,6 @@ const Advert = ()=>{
       <div><img src="https://raw.githubusercontent.com/realdonald1994/blog-resources/master/img/Klf_group_Assessment.png" width="100%"/></div>
       <div><img src="https://raw.githubusercontent.com/realdonald1994/blog-resources/master/img/Sketch.png" width="100%"/></div>
       <div><img src="https://raw.githubusercontent.com/realdonald1994/blog-resources/master/img/leetcode.jpeg" width="100%"/></div>
-      <div><img src="https://raw.githubusercontent.com/realdonald1994/blog-resources/master/img/arch.png" width="100%"/></div>
     </div>
   )
 }

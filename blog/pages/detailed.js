@@ -69,7 +69,7 @@ const Detailed = (props) =>{
               React-blog-develop
             </div>
             <div className="list-icon center">
-              <span><Icon type="calender"/>2020-08-08</span>
+              <span><Icon type="calendar"/>2020-08-08</span>
               <span><Icon type="folder"/>React</span>
               <span><Icon type="fire"/>500</span>
             </div>
