@@ -1,15 +1,17 @@
+/**
+ * @name: home
+ * @author: Zhongxu(Donald)
+ * @date: 11/08/2020 19:54
+ * @description：home
+ */
+
 'use strict';
 
 const Controller = require('egg').Controller;
 
 class HomeController extends Controller {
   async index() {
-    const { ctx } = this;
-    ctx.body = 'hi, egg';
-  }
-  async list(){
-    const {ctx} = this;
-    ctx.body = '<h1>jspang blog list</h1>'
+    this.ctx.body = 'api'
   }
 }
 

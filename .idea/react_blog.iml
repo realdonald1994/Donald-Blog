@@ -11,5 +11,7 @@
     <orderEntry type="library" name="@types/react-redux" level="application" />
     <orderEntry type="library" name="@types/react-router" level="application" />
     <orderEntry type="library" name="@types/next-seo" level="application" />
+    <orderEntry type="library" name="@types/egg.js" level="application" />
+    <orderEntry type="library" name="@types/egg-mock" level="application" />
   </component>
 </module>
