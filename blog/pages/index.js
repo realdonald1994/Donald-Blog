@@ -10,6 +10,7 @@ import Advert from "../components/Advert";
 import Footer from "../components/Footer";
 
 import '../static/style/pages/index.css'
+import servicePath from "../config/apiUrl";
 
 const Home = (list) => {
 
@@ -55,7 +56,7 @@ const Home = (list) => {
 }
 
 Home.getInitialProps = async ()=>{
-  const res = await axios.get('http://127.0.0.1:7001/default/getArticleList')
+  const res = await axios.get(servicePath.getArticleList)
   return res.data
 }
 

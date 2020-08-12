@@ -41,6 +41,25 @@ class HomeController extends Controller {
     const res = await this.app.mysql.query(sql)
     this.ctx.body = {data:res}
   }
+
+  async getTypeInfo(){
+    const result = await this.app.mysql.select('type')
+    this.ctx.body = {data:result}
+  }
+  // type id get article list
+  async getListById(){
+    let id = this.ctx.params.id
+    let sql = 'SELECT article.id as id ,'+
+      'article.title as title ,'+
+      'article.introduce as introduce ,'+
+      "FROM_UNIXTIME(article.addTime,'%Y-%m-%d %H:%i:%s') as addTime ,"+
+      'article.view_count as views ,'+
+      'type.typeName as typeName '+
+      'FROM article LEFT JOIN type ON article.type_id = type.Id'+
+      'WHERE type_id = '+id
+    const res = await this.app.mysql.query(sql)
+    this.ctx.body = {data:res}
+  }
 }
 
 module.exports = HomeController;

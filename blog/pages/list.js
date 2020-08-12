@@ -1,11 +1,14 @@
-import React, {useState} from 'react'
+import React, {useState,useEffect} from 'react'
 import Head from 'next/head'
 import {Row, Col, List, Icon,Breadcrumb} from "antd";
+import axios from 'axios'
+import Link from "next/link";
 
 import Header from "../components/Header";
 import Author from "../components/Author";
 import Footer from "../components/Footer";
 
+import servicePath from "../config/apiUrl";
 
 
 const MyList = () => {
@@ -59,5 +62,8 @@ const MyList = () => {
   )
 }
 
+MyList.getInitialProps = async ()=>{
+
+}
 
 export default MyList

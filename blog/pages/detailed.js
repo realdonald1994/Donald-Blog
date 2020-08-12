@@ -23,6 +23,7 @@ import 'highlight.js/styles/monokai-sublime.css'
 import 'markdown-navbar/dist/navbar.css'
 import '../static/style/pages/detailed.css'
 import '../static/style/components/header.css'
+import servicePath from "../config/apiUrl";
 
 
 const Detailed = (props) =>{
@@ -111,7 +112,7 @@ Detailed.getInitialProps = async (context) =>{
 
   const promise = new Promise((resolve)=>{
 
-    axios('http://127.0.0.1:7001/default/getArticleById/'+id).then(
+    axios(servicePath.getArticleById+id).then(
       (res)=>{
         console.log(res.data)
         resolve(res.data.data[0])
