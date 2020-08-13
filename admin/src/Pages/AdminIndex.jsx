@@ -5,8 +5,9 @@
  * @description：AdminIndex.jsx
  */
 import React,{useState} from "react";
-
+import {Route} from 'react-router-dom'
 import { Layout, Menu, Breadcrumb, Icon } from 'antd';
+import AddArticle from "./AddArticle";
 import '../static/css/AdminIndex.css'
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -51,13 +52,16 @@ function AdminIndex()  {
         </Menu>
       </Sider>
       <Layout>
-        <Header style={{ background: '#fff', padding: 0 }} />
         <Content style={{ margin: '0 16px' }}>
           <Breadcrumb style={{ margin: '16px 0' }}>
             <Breadcrumb.Item>Admin</Breadcrumb.Item>
             <Breadcrumb.Item>Workplace</Breadcrumb.Item>
           </Breadcrumb>
-          <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>xxxxxxxxxxxxxxxxxx</div>
+          <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
+            <div>
+              <Route path="/index/" exact component={AddArticle}/>
+            </div>
+          </div>
         </Content>
         <Footer style={{ textAlign: 'center' }}>Donald.com</Footer>
       </Layout>
