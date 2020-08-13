@@ -5,15 +5,17 @@
  * @description：AddArticle.jsx
  */
 
-import React, {useState} from 'react'
+import React, {useState,useEffect} from 'react'
 import marked from 'marked'
-import {Row,Col,Input,Select,Button,DatePicker} from 'antd'
+import {Row,Col,Input,Select,Button,DatePicker,message} from 'antd'
+import axios from 'axios'
+import servicePath from "../config/apiUrl";
 import '../static/css/AddArticle.css'
 
 const {Option} = Select
 const {TextArea} = Input
 
-function AddArticle() {
+function AddArticle(props) {
 
   const [articleId,setArticleId] = useState(0)  // 文章的ID，如果是0说明是新增加，如果不是0，说明是修改
   const [articleTitle,setArticleTitle] = useState('')   //文章标题
@@ -24,7 +26,12 @@ function AddArticle() {
   const [showDate,setShowDate] = useState()   //发布日期
   const [updateDate,setUpdateDate] = useState() //修改日志的日期
   const [typeInfo ,setTypeInfo] = useState([]) // 文章类别信息
-  const [selectedType,setSelectType] = useState(1) //选择的文章类别
+  const [selectedType,setSelectType] = useState('select type') //选择的文章类别
+
+  useEffect(()=>{
+    getTypeInfo()
+  },[])
+
 
   marked.setOptions({
     renderer: marked.Renderer(),
@@ -48,6 +55,86 @@ function AddArticle() {
     let html = marked(e.target.value)
     setIntroducehtml(html)
   }
+
+  const getTypeInfo = ()=>{
+    axios({
+      method:'get',
+      url:servicePath.getTypeInfo,
+      header:{ 'Access-Control-Allow-Origin':'*' },
+      withCredentials: true
+    }).then(
+      res=>{
+        if(res.data.data=="not login"){
+          localStorage.removeItem('openId')
+          props.history.push('/')
+        }else{
+          setTypeInfo(res.data.data)
+        }
+      }
+    )
+  }
+
+  const selectTypeHandler =(value) =>{
+    setSelectType(value)
+  }
+
+  const saveArticle = ()=>{
+    if(selectedType === 'select type'){
+      message.error('please select type')
+      return false
+    }else if(!articleTitle){
+      message.error('please input title')
+      return false
+    }else if(!articleContent){
+      message.error('please input content')
+      return false
+    }else if(!introducemd){
+      message.error('please input introduction')
+      return false
+    }else if(!showDate){
+      message.error('please input post date')
+      return false
+    }
+
+    let dataProps = {}
+    dataProps.type_id = selectedType
+    dataProps.title = articleTitle
+    dataProps.article_content = articleContent
+    dataProps.introduce = introducemd
+    let dateText = showDate.replace('-','/')
+    dataProps.addTime = (new Date(dateText).getTime())/1000
+
+    if(articleId==0){
+      dataProps.view_count =0
+      axios({
+        method:'post',
+        url:servicePath.addArticle,
+        data:dataProps,
+        withCredentials:true
+      }).then(res=>{
+        setArticleId(res.data.insertId)
+        if(res.data.isSuccess){
+          message.success('post success')
+        }else{
+          message.success('post failed')
+        }
+      })
+    }else {
+      dataProps.id = articleId
+      axios({
+        method:'post',
+        url:servicePath.updateArticle,
+        data:dataProps,
+        withCredentials:true
+      }).then(res=>{
+        if(res.data.isSuccess){
+          message.success('update success')
+        }else{
+          message.success('update failed')
+        }
+      })
+    }
+  }
   return (
     <div>
       <Row gutter={5}>
@@ -55,14 +142,20 @@ function AddArticle() {
           <Row gutter={10}>
             <Col span={20}>
               <Input
+                value={articleTitle}
                 placeholder="blog title"
                 size="large"
+                onChange={(e)=>setArticleTitle(e.target.value)}
               />
             </Col>
             <Col span={4}>
               &nbsp;
-              <Select defaultValue="1" size="large">
-                <Option value="1">Video</Option>
+              <Select defaultValue={selectedType} size="large" onChange={selectTypeHandler}>
+                {typeInfo.map((item,index)=>{
+                  return (
+                    <Option key={index} value={item.Id}>{item.typeName}</Option>
+                  )
+                })}
               </Select>
             </Col>
           </Row>
@@ -89,7 +182,7 @@ function AddArticle() {
             <Col span={24}>
               <Button size="large">preview</Button>
               &nbsp;
-              <Button size="large" type="primary">save</Button>
+              <Button size="large" type="primary" onClick={saveArticle}>save</Button>
               <br/>
             </Col>
             <Col span={24}>
@@ -114,6 +207,7 @@ function AddArticle() {
                 <DatePicker
                   placeholder="post date"
                   size="large"
+                  onChange={(date, dateString)=>setShowDate(dateString)}
                 />
               </div>
             </Col>

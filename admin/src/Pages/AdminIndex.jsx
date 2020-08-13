@@ -8,17 +8,25 @@ import React,{useState} from "react";
 import {Route} from 'react-router-dom'
 import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 import AddArticle from "./AddArticle";
+import ArticleList from "./ArticleList";
 import '../static/css/AdminIndex.css'
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
-function AdminIndex()  {
+function AdminIndex(props)  {
   const [collapsed,setCollapsed] = useState(false)
 
   const onCollapse =  collapsed => {
     setCollapsed(collapsed)
   };
 
+  const handleClickArticle = (e)=>{
+    if(e.key=='addArticle'){
+      props.history.push('/index/add')
+    }else{
+      props.history.push('/index/list')
+    }
+  }
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
@@ -41,9 +49,10 @@ function AdminIndex()  {
                 <span>Blog</span>
               </span>
             }
+            onClick={handleClickArticle}
           >
-            <Menu.Item key="3">Add</Menu.Item>
-            <Menu.Item key="4">List</Menu.Item>
+            <Menu.Item key="addArticle">Add</Menu.Item>
+            <Menu.Item key="articleList">List</Menu.Item>
           </SubMenu>
           <Menu.Item key="9">
             <Icon type="file" />
@@ -60,6 +69,8 @@ function AdminIndex()  {
           <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
             <div>
               <Route path="/index/" exact component={AddArticle}/>
+              <Route path="/index/add" exact component={AddArticle}/>
+              <Route path="/index/list" exact component={ArticleList}/>
             </div>
           </div>
         </Content>
